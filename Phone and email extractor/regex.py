@@ -1,5 +1,11 @@
+'''
+How to use?
+Just copy the file text and run this file regex.py and the output is
+in the log.txt file which is created by this file.
+'''
 import re                             # regex module
 import pyperclip
+
 
 phone = re.compile(r'''(              # phone number regex
     (\d{3}|\(\d{3}\))?                # area code
@@ -19,15 +25,9 @@ email = re.compile(r'''(              # email regex
 output = open('log.txt','w')          # redirecting the output
 
 text = str(pyperclip.paste())
-matches = []
 for groups in phone.findall(text):
     phoneNum = '-'.join([groups[1], groups[3], groups[5]])
     print(phoneNum,file = output)
 
 for group in email.findall(text):
      print(group[0],file = output)
-
-if len(matches) > 0:
-    print('Copied to log.txt')
-else:
-    print('No phone numbers or email addresses found.')
